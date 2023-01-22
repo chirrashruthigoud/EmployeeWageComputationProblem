@@ -9,7 +9,6 @@ numworkingDays=20;
 for(( day=1; day<=numworkingDays; day++ ))
 do
 randomCheck=$((RANDOM%3));
-
 case $randomCheck in $isFullTime)
                        empHrs=8;;
                       $isPartTime)
@@ -17,10 +16,8 @@ case $randomCheck in $isFullTime)
                       *)
                       empHrs=0;;
 esac
-
 salary=$(($empHrs*$empRatePerHr))
 totalsalary=$(($totalSalary+$salary))
-
 done
+echo "Emloyee has earned $totalsalary in month":
 
-echo "Emloyee has earned $totalsalary in month"
