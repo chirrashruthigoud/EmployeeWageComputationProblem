@@ -1,43 +1,40 @@
-echo "welcome to Employee Wage Conputation Program"
+echo "Welcome to Employee Wage Computation Program"
 
-isPartTime=1;
-isFullTime=2;
-empHrs=0;
+function calculateWorkingHour() {
+	case $1 in
+		0)
+			workingHour=0;
+			;;
+
+		1)
+			workingHour=8;
+			;;
+		2)
+			workingHour=4;
+			;;
+	esac;
+	echo $workingHour;
+}
+declare -A day
+perHourSalary=20;
 totalSalary=0;
-totalworkingHour=0;
-empRatePerHr=20;
-numworkingDays=20;
+totalWorkingHour=0;
 day=1;
 
-function calculateworkingingHour() {
-          case $randomCheck in
-                      $isFullTime)
-                       empHrs=8;;
-                      $isPartTime)
-                       empHrs=4;;
-                      *)
-                      empHrs=0;;
-esac
-         echo $empHrs;
-}
-
-while [[ $day -le 20 && $totalworkingHour -lt 100 ]]
+while [[ $day -le 20 && $totalWorkingHour -lt 100 ]]
 do
-randomCheck=$((RANDOM%3));
-
-          wHour=$(calculateworkingingHour $randomCheck);
-          totalworkingHour=$(($totalworkingHour + $wHour));
-          if [ $totalworkingHour -gt 100 ]
-          then
-                  totalsalary=$(($totalSalary - $salary));
-                  break;
-          fi
-          salary=$(($empRatePerHr*$wHour));
-          totalsalary=$(($totalSalary+$salary));
-          ((day++));
-echo "Employee daily wage: "${salary[@]}
-echo "Employee daily wage: "${totalsalary[*]}
-
+	wHour=$(calculateWorkingHour $((RANDOM%3)));
+	totalWorkingHour=$(($totalWorkingHour + $wHour));
+	if [ $totalWorkingHour -gt 100 ]
+	then
+		totalWorkingHour=$(($totalWorkingHour - $wHour));
+		break;
+	fi
+	salary=$(($perHourSalary * $wHour));
+	totalSalary=$(($totalSalary + $salary));
+	((day++));
+echo "Employee daily wage:"${salary[@]}
+echo "Employee Total wage:"${totalSalary[*]}
+echo "Employee Day wise wage:"${day[@]}
 done
-
-echo "Emloyee has earned $totalsalary in month (Total working Hour : $totalworkingHour)";
+echo "Employee has earned $totalSalary $ in a month (Total working Hour : $totalWorkingHour)";
